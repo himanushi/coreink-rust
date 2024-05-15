@@ -14,6 +14,7 @@ ARG GITHUB_TOKEN
 RUN apt-get update \
     && apt-get install -y pkg-config curl gcc clang libudev-dev unzip xz-utils \
     git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 \
+    libstdc++-12-dev \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install xtensa-esp32-elf-gcc toolchain as root
@@ -68,7 +69,7 @@ RUN if [ -n "${GITHUB_TOKEN}" ]; then export GITHUB_TOKEN=${GITHUB_TOKEN}; fi  \
 RUN rustup default esp
 
 # Set IDF_PATH environment variable
-ENV IDF_PATH=/path/to/esp-idf
+ENV IDF_PATH=/home/esp/coreink_rust/.embuild/espressif/esp-idf/v5.1.3
 
 # Activate ESP environment
 RUN echo "source /home/${CONTAINER_USER}/export-esp.sh" >> ~/.bashrc
