@@ -16,6 +16,14 @@ RUN apt-get update \
     git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
+# Install xtensa-esp32-elf-gcc toolchain as root
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz \
+    && tar -xzf xtensa-esp32-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz -C /opt \
+    && rm xtensa-esp32-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+
+# Set path for xtensa-esp32-elf-gcc toolchain
+ENV PATH="/opt/xtensa-esp32-elf/bin:${PATH}"
+
 # Set users
 RUN adduser --disabled-password --gecos "" ${CONTAINER_USER}
 USER ${CONTAINER_USER}
@@ -59,6 +67,8 @@ RUN if [ -n "${GITHUB_TOKEN}" ]; then export GITHUB_TOKEN=${GITHUB_TOKEN}; fi  \
 # Set default toolchain
 RUN rustup default esp
 
+# Set IDF_PATH environment variable
+ENV IDF_PATH=/path/to/esp-idf
 
 # Activate ESP environment
 RUN echo "source /home/${CONTAINER_USER}/export-esp.sh" >> ~/.bashrc
