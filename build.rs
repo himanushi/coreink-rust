@@ -12,16 +12,16 @@ fn main() {
 
     // xtensa-esp32-elf-g++コンパイラを使用してC++ライブラリのビルド
     cc::Build::new()
-        .cpp(true) // C++をビルドするためにcpp(true)を指定
-        .compiler("xtensa-esp32-elf-g++") // ESP-IDF用のコンパイラを指定
-        .flag("-std=c++11") // 必要に応じてC++の標準を指定
-        .flag("-fno-exceptions") // 例外処理を無効化
-        .flag("-fno-rtti") // RTTIを無効化
+        .cpp(true)
+        .compiler("xtensa-esp32-elf-g++")
+        .flag("-std=c++11")
+        .flag("-fno-exceptions") 
+        .flag("-fno-rtti")
         .include("c_libs/M5GFX/src")
         .include("c_libs/M5Unified/src")
-        .include(cpp_include_path1) // 標準ライブラリのインクルードパスを追加
-        .include(cpp_include_path2) // 標準ライブラリのインクルードパスを追加
-        .include(cpp_include_path3) // 標準ライブラリのインクルードパスを追加
+        .include(cpp_include_path1)
+        .include(cpp_include_path2)
+        .include(cpp_include_path3)
         .file("c_libs/M5GFX/src/M5GFX.cpp")
         .file("c_libs/M5Unified/src/M5Unified.cpp")
         .compile("m5");
