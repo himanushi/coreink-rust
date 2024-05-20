@@ -1,7 +1,8 @@
-fn main() {
-    esp_idf_svc::sys::link_patches();
-    esp_idf_svc::log::EspLogger::initialize_default();
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-    log::info!("Hello, world!");
-    log::info!("Hello, world!!!");
+fn main() {
+    unsafe {
+        // M5Unifiedの関数を呼び出す例
+        M5.begin();
+    }
 }
