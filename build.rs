@@ -25,6 +25,11 @@ fn main() {
         .clang_arg("-Iesp-idf/components/soc/include")
         .clang_arg("-Iesp-idf/components/freertos/config/include/freertos")
         .clang_arg("-Iesp-idf/components/freertos/config/linux/include")
+        .clang_arg("-Iesp-idf/components/freertos/FreeRTOS-Kernel/portable/linux/include/freertos")
+        .clang_arg("-Iesp-idf/components/xtensa/include")
+        .clang_arg("-Iesp-idf/components/xtensa/esp32/include")
+        .clang_arg("-Iesp-idf/components/esp_driver_gpio/include")
+        .clang_arg("-Iesp-idf/components/esp_timer/include")
         .clang_arg("-I/usr/lib/gcc/aarch64-linux-gnu/12/include")
         .clang_arg("-I/usr/include/c++/12")
         .clang_arg("-I/usr/include/aarch64-linux-gnu/c++/12")
@@ -35,8 +40,6 @@ fn main() {
         .clang_arg("-D_GNU_SOURCE")
         .clang_arg("-xc++")
         .clang_arg("-std=c++14")
-        .clang_arg("-lpthread")
-        .clang_arg("-lc")
         .generate()
         .expect("Unable to generate bindings");
 
