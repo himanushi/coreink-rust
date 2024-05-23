@@ -39,7 +39,7 @@ fn main() {
         .clang_arg("-I/usr/include")
         .clang_arg("-D_GNU_SOURCE")
         .clang_arg("-xc++")
-        .clang_arg("-std=c++14")
+        .clang_arg("-std=c++17")
         .generate()
         .expect("Unable to generate bindings");
 
